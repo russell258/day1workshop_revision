@@ -27,21 +27,42 @@ public class App
             if (commandInput.equals("list")){
                 if (cartItems.size()>0){
                     for (String item: cartItems){
-                        int i = 0;
+                        int i = 1;
                         System.out.println(i + ". " + item);
+                        i++;
                     }
                 }else{
                     System.out.println("Your cart is empty");
                 }
             }
 
+            //case for add
+            if (commandInput.equals("add")){
+                // if add, scan line after the add
+                secondInput = scan.nextLine().trim();
+                
+                //check that line after add is not empty
+                if (!secondInput.equals("")){
 
+                    //replace the commas with nothinig and make each input an element 
+                    secondInput = secondInput.trim().replace(",", "");
+                    String[] secondInputItems = secondInput.split(" ");
                     
+                    // add into cart and print out added
+                    for (String item:secondInputItems){
+                        //check if cart already contains the item
+                        if (cartItems.contains(item)){
+                            System.out.println("you have "+item + " in your cart.");
+                        }else{
+                            cartItems.add(item);
+                            System.out.println(item+" added to cart");
+                        }
 
-        // case for add
+                    }
 
-                // secondInput = commandInput.substring(5);
-                // System.out.println(secondInput);
+                }
+
+            }
 
 
         //case for delete
