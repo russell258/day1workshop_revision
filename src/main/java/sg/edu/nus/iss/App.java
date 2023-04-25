@@ -26,8 +26,8 @@ public class App
             // cases for list
             if (commandInput.equals("list")){
                 if (cartItems.size()>0){
+                    int i = 1;
                     for (String item: cartItems){
-                        int i = 1;
                         System.out.println(i + ". " + item);
                         i++;
                     }
@@ -39,34 +39,37 @@ public class App
             //case for add
             if (commandInput.equals("add")){
                 // if add, scan line after the add
-                secondInput = scan.nextLine().trim();
-                
+                // replace the commas with nothing
+                secondInput = scan.nextLine().trim().replace(",","");
                 //check that line after add is not empty
                 if (!secondInput.equals("")){
-
-                    //replace the commas with nothinig and make each input an element 
-                    secondInput = secondInput.trim().replace(",", "");
+                    //replace all additional spaces into one space and make each input an element 
+                    secondInput = secondInput.trim().replaceAll(" +", " ");
                     String[] secondInputItems = secondInput.split(" ");
-                    
                     // add into cart and print out added
                     for (String item:secondInputItems){
                         //check if cart already contains the item
                         if (cartItems.contains(item)){
-                            System.out.println("you have "+item + " in your cart.");
+                            System.out.println("you already have "+item + " in your cart.");
                         }else{
                             cartItems.add(item);
                             System.out.println(item+" added to cart");
                         }
-
                     }
-
                 }
-
             }
-
-
-        //case for delete
-
+            //case for delete
+            if (commandInput.equals("delete")){
+                // collect the index integer for deleting
+                int deleteNumber = 0;
+                deleteNumber = scan.nextInt();
+                if (deleteNumber!=0 && deleteNumber<=cartItems.size()){
+                    System.out.println(cartItems.get(deleteNumber-1) + " removed from cart");
+                    cartItems.remove(deleteNumber-1);
+                }else{
+                    System.out.println("Incorrect item index");
+                }
+            }
         }
 
         scan.close();
