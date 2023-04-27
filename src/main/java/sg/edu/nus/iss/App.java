@@ -1,5 +1,6 @@
 package sg.edu.nus.iss;
 
+import java.io.File;
 import java.util.ArrayList;
 // import java.io.Console;
 import java.util.Scanner;
@@ -8,6 +9,34 @@ public class App
 {
     public static void main( String[] args )
     {
+        
+        // task 1: check if directory for shoppingcart, cartdb that holds all the users exist. else create it
+        // if no args specified, use default directory db
+        if (args.length>0){
+            String dirPath = args[0];
+            String fileName = args[1];
+            String dirPathFileName = dirPath + File.separator + fileName;
+            for (String arg: args){
+                System.out.println(arg);
+            }
+        }else{
+            String dirPathFileName = "C:" + File.separator + "data";
+            System.out.println("You have not passed in any argument so the default directory db will be used");
+        }
+
+
+        // task 2:
+        // scan keywords > login, list, add, delete, save, users
+        
+        // login
+        //detect if file exists, otherwise create user file
+
+        // save
+        // write from current arraylist into the user file and flush
+
+        // users
+        // list all the files in the directory
+
         System.out.println("Welcome to your shopping cart");
         //Console con = System.console();
         Scanner scan = new Scanner(System.in);
