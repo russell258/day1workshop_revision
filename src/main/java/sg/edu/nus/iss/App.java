@@ -1,12 +1,13 @@
 package sg.edu.nus.iss;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class App 
 {
-    public static void main( String[] args )
+    public static void main( String[] args ) throws IOException
     {
         // task 1: check if directory for shoppingcart, cartdb that holds all the users exist. else create it
         // if no args specified, use default directory db
@@ -26,11 +27,21 @@ public class App
         //use scanner to ask for input and check first command
         //loop to keep asking for input
         Scanner scan = new Scanner(System.in);
-        String commandInput = scan.next();
+        String commandInput = "";
+        String secondInput = "";
+        String dirPath = "";
         while(!commandInput.equals("quit")){
-        // return list of users
+        // call list method return list of files
+            commandInput = scan.next();
             if (commandInput.equals("users")){
                 ShoppingCartDB.users(newDirectory);
+            }
+
+        // call login method
+            if (commandInput.equals("login")){
+                secondInput = scan.nextLine();
+                dirPath = newDirectory + File.separator + secondInput;
+                ShoppingCartDB.login(dirPath, secondInput);
             }
             
         // list all the files in the directory
@@ -85,7 +96,7 @@ public class App
     //         if (commandInput.equals("add")){
     //             // if add, scan line after the add
     //             // replace the commas with nothing
-    //             secondInput = scan.nextLine().trim().replace(",","");
+    //             
     //             //check that line after add is not empty
     //             if (!secondInput.equals("")){
     //                 //replace all additional spaces into one space and make each input an element 

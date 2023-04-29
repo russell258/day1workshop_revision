@@ -1,6 +1,7 @@
 package sg.edu.nus.iss;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,14 +26,19 @@ public class ShoppingCartDB {
 
 
 
-    //new methods for reading, writing, 
+    //new methods for reading, writing,  GET TO THIS LATER
 
-    public void save(String[] itemsToSave, String savedUser){
-        this.itemsToSave = itemsToSave;
-    }
+    // public void save(String[] itemsToSave, String savedUser){
+    //     this.itemsToSave = itemsToSave;
+    // }
 
-    public void login(){
-
+    public static void login(String dirPath ,String userName) throws IOException{
+        File userFile = new File(dirPath);
+        if (userFile.exists()){
+            System.out.println(dirPath + " already exists");
+        }else{
+            userFile.createNewFile();
+        }
     }
 
     public static void users(File directory){
