@@ -3,6 +3,7 @@ package sg.edu.nus.iss;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,9 +49,16 @@ public class ShoppingCartDB {
             System.out.println("Incorrect item index");
         }
     }
-    // public void save(String[] itemsToSave, String savedUser){
-    //     this.itemsToSave = itemsToSave;
-    // }
+
+    public static void save(String dirPath, ArrayList<String>cartItems) throws IOException{
+        FileWriter filewriter = new FileWriter(dirPath, false);
+        for (String item: cartItems){
+            filewriter.write(item + "\n");
+        }
+        filewriter.flush();
+        filewriter.close();
+        System.out.println("Your cart has been saved");
+    }
 
     public static void login(String dirPath ,String userName, ArrayList<String> cartItems) throws IOException{
         File userFile = new File(dirPath);
