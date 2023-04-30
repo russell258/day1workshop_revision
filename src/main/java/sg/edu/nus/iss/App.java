@@ -31,20 +31,20 @@ public class App
         String secondInput = "";
         String dirPath = "";
         while(!commandInput.equals("quit")){
-        // call list method return list of files
-            commandInput = scan.next();
+        // call list method return list of files in the directory
+            commandInput = scan.next().trim();
             if (commandInput.equals("users")){
                 ShoppingCartDB.users(newDirectory);
             }
 
         // call login method
             if (commandInput.equals("login")){
-                secondInput = scan.nextLine();
+                secondInput = scan.nextLine().trim();
                 dirPath = newDirectory + File.separator + secondInput;
                 ShoppingCartDB.login(dirPath, secondInput);
             }
             
-        // list all the files in the directory
+
 
 
         }
