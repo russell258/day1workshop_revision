@@ -27,9 +27,11 @@ public class App
         //use scanner to ask for input and check first command
         //loop to keep asking for input
         Scanner scan = new Scanner(System.in);
+        ArrayList<String> cartItems = new ArrayList<>();
         String commandInput = "";
         String secondInput = "";
         String dirPath = "";
+
         while(!commandInput.equals("quit")){
         // call list method return list of files in the directory
             commandInput = scan.next().trim();
@@ -41,43 +43,28 @@ public class App
             if (commandInput.equals("login")){
                 secondInput = scan.nextLine().trim();
                 dirPath = newDirectory + File.separator + secondInput;
-                ShoppingCartDB.login(dirPath, secondInput);
+                ShoppingCartDB.login(dirPath, secondInput, cartItems);
             }
             
+        // call add method
+            if (commandInput.equals("list")){
+                ShoppingCartDB.list(cartItems);
+            }
 
-
+            if (commandInput.equals("add")){
+                secondInput = scan.nextLine().trim();
+                if (!secondInput.equals("")){
+                    secondInput = secondInput.trim().replaceAll(" +", " ");
+                    ShoppingCartDB.add(secondInput, cartItems);
+                }
+            }
 
         }
         scan.close();
     }
 }
-
-
-
-
-        // task 2:
-        // scan keywords > login, list, add, delete, save, users
-        
-        // login
-        //detect if file exists, otherwise create user file
-
         // save
         // write from current arraylist into the user file and flush
-
-
-
-    //     System.out.println("Welcome to your shopping cart");
-    //     //Console con = System.console();
-  
-
-    //     String commandInput = " ";
-    //     String secondInput = " ";
-    //     ArrayList<String> cartItems = new ArrayList<>();
-
-
-
-    
-
 
     //         // cases for list
     //         if (commandInput.equals("list")){

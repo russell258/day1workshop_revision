@@ -14,12 +14,30 @@ public class ShoppingCartDB {
 
     //previous shoppingCart functions
 
-    public void list(ArrayList<String>cartItems){
-        
+    public static void list(ArrayList<String>cartItems){
+        int i = 1;
+        if (cartItems.size()>0){
+            for (String item: cartItems){
+                System.out.println(i + ". "+ item);
+                i++;
+            }
+        }else{
+            System.out.println("your cart is empty");
+        }
+
     }
 
-    public void add(){
-
+    public static void add(String itemToAdd, ArrayList<String>cartItems){
+        String[] secondInputItems = itemToAdd.split(" ");
+        for (String item:secondInputItems){
+                                //check if cart already contains the item
+            if (cartItems.contains(item)){
+                System.out.println("you already have "+item + " in your cart.");
+            }else{
+                cartItems.add(item);
+                System.out.println(item+" added to cart");
+            }
+        }
     }
 
     public void delete(){
@@ -34,30 +52,41 @@ public class ShoppingCartDB {
     //     this.itemsToSave = itemsToSave;
     // }
 
-    public static void login(String dirPath ,String userName) throws IOException{
+    public static void login(String dirPath ,String userName, ArrayList<String> cartItems) throws IOException{
         File userFile = new File(dirPath);
         if (userFile.exists()){
-            System.out.println(userName + " already exists");
-            // need to read items inside
+            // need to read the items inside
+            // and add them to cartItems
             FileReader fr = new FileReader(dirPath);
             BufferedReader br = new BufferedReader(fr);
             String line = "";
+            //reset the cartItems when logging in
+            cartItems.removeAll(cartItems);
             while (line!=null){
-                System.out.println(line);
                 line=br.readLine();
+                if (line!=null){
+                    cartItems.add(line);
+                }
             }
+            System.out.println(userName + ", your cart contains the following items");
+            ShoppingCartDB.list(cartItems);
             br.close();
             fr.close();
-
         }else{
+            //clear all cartItems when logging in
+            cartItems.removeAll(cartItems);
             userFile.createNewFile();
             System.out.println(userName + ", your cart is empty");
+  
         }
     }
 
     public static void users(File directory){
-        for (String user: directory.list()){
-            System.out.println(user.toString());
+        if (directory.list().length>0){
+            System.out.println("The following users are registered");
+            for (String user: directory.list()){
+                System.out.println(user.toString());
+            }
         }
     }
 
