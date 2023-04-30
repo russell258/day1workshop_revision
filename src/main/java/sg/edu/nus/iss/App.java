@@ -32,6 +32,7 @@ public class App
         String secondInput = "";
         String dirPath = "";
         Integer deleteNumber = 0;
+        boolean isLoggedIn = false;
 
         while(!commandInput.equals("quit")){
         // call list method return list of files in the directory
@@ -45,6 +46,7 @@ public class App
                 secondInput = scan.nextLine().trim();
                 dirPath = newDirectory + File.separator + secondInput;
                 ShoppingCartDB.login(dirPath, secondInput, cartItems);
+                isLoggedIn = true;
             }
             
         // call add method
@@ -69,9 +71,12 @@ public class App
             }
             //save, write from current arraylist into the user file and flush
             if (commandInput.equals("save")){
-
+                if (isLoggedIn){
+                    ShoppingCartDB.save(dirPath, cartItems);
+                }else{
+                    System.out.println("Please log in first");
+                }
             }
-
         }
         scan.close();
     }
