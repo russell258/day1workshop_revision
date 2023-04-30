@@ -31,6 +31,7 @@ public class App
         String commandInput = "";
         String secondInput = "";
         String dirPath = "";
+        Integer deleteNumber = 0;
 
         while(!commandInput.equals("quit")){
         // call list method return list of files in the directory
@@ -59,62 +60,19 @@ public class App
                 }
             }
 
+            if (commandInput.equals("delete")){
+                secondInput=scan.nextLine().trim();
+                if (secondInput.matches(".*\\d+.*")){
+                    deleteNumber = Integer.parseInt(secondInput);
+                    ShoppingCartDB.delete(cartItems, deleteNumber);
+                }
+            }
+            //save, write from current arraylist into the user file and flush
+            if (commandInput.equals("save")){
+
+            }
+
         }
         scan.close();
     }
 }
-        // save
-        // write from current arraylist into the user file and flush
-
-    //         // cases for list
-    //         if (commandInput.equals("list")){
-    //             if (cartItems.size()>0){
-    //                 int i = 1;
-    //                 for (String item: cartItems){
-    //                     System.out.println(i + ". " + item);
-    //                     i++;
-    //                 }
-    //             }else{
-    //                 System.out.println("Your cart is empty");
-    //             }
-    //         }
-
-    //         //case for add
-    //         if (commandInput.equals("add")){
-    //             // if add, scan line after the add
-    //             // replace the commas with nothing
-    //             
-    //             //check that line after add is not empty
-    //             if (!secondInput.equals("")){
-    //                 //replace all additional spaces into one space and make each input an element 
-    //                 secondInput = secondInput.trim().replaceAll(" +", " ");
-    //                 String[] secondInputItems = secondInput.split(" ");
-    //                 // add into cart and print out added
-    //                 for (String item:secondInputItems){
-    //                     //check if cart already contains the item
-    //                     if (cartItems.contains(item)){
-    //                         System.out.println("you already have "+item + " in your cart.");
-    //                     }else{
-    //                         cartItems.add(item);
-    //                         System.out.println(item+" added to cart");
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //         //case for delete
-    //         if (commandInput.equals("delete")){
-    //             // collect the index integer for deleting
-    //             int deleteNumber = 0;
-    //             deleteNumber = scan.nextInt();
-    //             if (deleteNumber!=0 && deleteNumber<=cartItems.size()){
-    //                 System.out.println(cartItems.get(deleteNumber-1) + " removed from cart");
-    //                 cartItems.remove(deleteNumber-1);
-    //             }else{
-    //                 System.out.println("Incorrect item index");
-    //             }
-    //         }
-    //     }
-
-    //     scan.close();
-//     }
-// }

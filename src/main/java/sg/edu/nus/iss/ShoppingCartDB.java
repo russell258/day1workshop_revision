@@ -40,14 +40,14 @@ public class ShoppingCartDB {
         }
     }
 
-    public void delete(){
-
+    public static void delete(ArrayList<String>cartItems, int deleteNumber){
+        if (deleteNumber!=0 && deleteNumber<=cartItems.size()){
+            System.out.println(cartItems.get(deleteNumber-1) + " removed from cart");
+            cartItems.remove(deleteNumber-1);
+        }else{
+            System.out.println("Incorrect item index");
+        }
     }
-
-
-
-    //new methods for reading, writing,  GET TO THIS LATER
-
     // public void save(String[] itemsToSave, String savedUser){
     //     this.itemsToSave = itemsToSave;
     // }
